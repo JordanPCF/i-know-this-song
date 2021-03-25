@@ -1,9 +1,10 @@
 class Song():
 
-    def __init__(self, title, artist, lyric_snippet=""):
+    def __init__(self, title, artist, lyric_snippet="", uri=""):
         self.title = title
         self.artist = artist
         self.lyric_snippet = lyric_snippet
+        self.uri = uri # for playback
 
     def __repr__(self):
         return f'{self.title} by {self.artist}'
@@ -14,3 +15,6 @@ class Song():
             obj.title == self.title and
             obj.artist == self.artist
         )
+
+    def __hash__(self):
+        return hash(repr(self))

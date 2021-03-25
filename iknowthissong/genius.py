@@ -1,19 +1,20 @@
 # from secrets import GENIUS_CLIENT_ID
 from song import Song
 import requests
-# import json
+# import requests_cache
+import json
+import re
 from typing import Sequence
+import functools
 
 LYRIC_ENDPOINT = 'https://genius.com/api/search/lyric'
 
+# requests_cache.install_cache('genius_cache', backend='sqlite', expire_after=99999999999999)
 
-def lyric_search(lyrics: str, page: int=1, per_page: int=5) -> dict:
+
+def _request_lyric_search(lyrics: str, page: int=1, per_page: int=20) -> dict:
     r = requests.get(LYRIC_ENDPOINT, params={'q': lyrics, 'page': page, 'per_page': per_page})
     return r.json()
-
-
-def _get_next_page():
-    pass
 
 
 def _json_to_songs(json_response: dict) -> Sequence[Song]:
@@ -38,7 +39,8 @@ def _get_song_title(hit: dict) -> str:
 
 
 def _get_primary_artist(hit: dict) -> str:
-    return hit['result']['primary_artist']['name']
+    artist = hit['result']['primary_artist']['name']
+    return re.split(', |& ', artist)[0]
 
 
 def _get_lyric_snippet(hit: dict) -> str:
@@ -47,6 +49,6 @@ def _get_lyric_snippet(hit: dict) -> str:
         return highlight['value']
 
 
-print(_json_to_songs(lyric_search('party girls', per_page=3)))
-
-
+@functools.lru_cache(maxsize=1000)
+def get_songs_from_lyrics(lyrics:str, page=1) -> Sequence[Song]:
+    return _json_to_songs(_request_lyric_search(lyrics, page))

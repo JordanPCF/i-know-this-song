@@ -1,2 +1,2 @@
 # i-know-this-song
-Lyric search within Spotify playlists
+Search for lyrics within Spotify playlists

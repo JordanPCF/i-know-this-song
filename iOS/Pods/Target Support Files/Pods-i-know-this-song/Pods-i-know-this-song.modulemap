@@ -1,0 +1,6 @@
+framework module Pods_i_know_this_song {
+  umbrella header "Pods-i-know-this-song-umbrella.h"
+
+  export *
+  module * { export * }
+}

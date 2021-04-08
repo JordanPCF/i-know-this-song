@@ -16,8 +16,6 @@ class WebSocketTaskConnection: NSObject {
     var response: String
     
     init(url: URL) {
-//        super.init()
-//        urlSession = URLSession(configuration: .default, delegate: self, delegateQueue: delegateQueue)
         urlSession = URLSession(configuration: .default)
         webSocketTask = urlSession.webSocketTask(with: url)
         
@@ -25,8 +23,7 @@ class WebSocketTaskConnection: NSObject {
     }
     
     func connect() {
-        webSocketTask!.resume()
-        
+        webSocketTask!.resume()        
 //        self.listen()
     }
     
@@ -52,7 +49,6 @@ class WebSocketTaskConnection: NSObject {
     }
     
     func listen(completion: @escaping (String) -> ()) {
-        var response_text = ""
         webSocketTask!.receive { result in
             switch result {
             case .failure(let error):
@@ -60,20 +56,14 @@ class WebSocketTaskConnection: NSObject {
             case .success(let message):
                 switch message {
                 case .string(let text):
-                    response_text = text
-                    completion(response_text)
+                    completion(text)
                 case .data(let data):
                     print("data is ", data)
                 @unknown default:
                     fatalError()
                 }
-                
-//                self.listen()
             }
         }
-//        print("about to return")
-        
-//        return response_text
     }
     
     func getPlaylists(completion: @escaping (String) -> ()) {
@@ -96,7 +86,6 @@ class WebSocketTaskConnection: NSObject {
             self.response = response_text
             completion(response_text)
         }
-
     }
 }
     

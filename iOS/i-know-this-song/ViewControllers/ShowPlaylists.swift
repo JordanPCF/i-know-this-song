@@ -14,20 +14,12 @@ class ShowPlaylists: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        var socketConnection = WebSocketTaskConnection(url: URL(string: "wss://l7pgtq5sw5.execute-api.us-west-2.amazonaws.com/production")!)
+        let socketConnection = WebSocketTaskConnection(url: URL(string: "wss://l7pgtq5sw5.execute-api.us-west-2.amazonaws.com/production")!)
         socketConnection.connect()
 //        socketConnection.send(text: "Hello")
         socketConnection.getPlaylists { responseString in
-//            print("callback: ", responseString)
             print("socket response:", socketConnection.response)
         }
-//        print(socketConnection.response)
-
-//        DispatchQueue.main.asyncAfter(deadline: .now() + 20.0) {
-//            print("response: ")
-//            print(socketConnection.response)
-//        }
-        
     }
 
     func changeText(txt: String) {

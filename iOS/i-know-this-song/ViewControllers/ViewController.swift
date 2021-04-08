@@ -13,18 +13,20 @@ class ViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view.
-        let an_api_call = APIResponse()
-        an_api_call.getResponse()
         
-        print(an_api_call.response_string)
-        DispatchQueue.main.asyncAfter(deadline: .now() + 3.0) {
-            print(an_api_call.response_string)
-        }
+
+//        let an_api_call = RESTAPIResponse()
+//        an_api_call.getResponse()
+//
+//        print(an_api_call.response_string)
+//        DispatchQueue.main.asyncAfter(deadline: .now() + 3.0) {
+//            print(an_api_call.response_string)
+//        }
     }
 }
 
-class APIResponse {
+
+class RESTAPIResponse {
     var response_string : String
     
     init() {

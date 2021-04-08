@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		170D2305261BBA5100E85D32 /* WebSockets.swift in Sources */ = {isa = PBXBuildFile; fileRef = 170D2304261BBA5100E85D32 /* WebSockets.swift */; };
 		17339ADD260E408800E84532 /* ShowPlaylists.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17339ADC260E408800E84532 /* ShowPlaylists.swift */; };
 		1746FD8F2609462C0077087B /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1746FD8E2609462C0077087B /* AppDelegate.swift */; };
 		1746FD912609462C0077087B /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1746FD902609462C0077087B /* SceneDelegate.swift */; };
@@ -20,6 +21,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		170D2304261BBA5100E85D32 /* WebSockets.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebSockets.swift; sourceTree = "<group>"; };
 		17339ADC260E408800E84532 /* ShowPlaylists.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShowPlaylists.swift; sourceTree = "<group>"; };
 		1746FD8B2609462C0077087B /* i-know-this-song.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "i-know-this-song.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		1746FD8E2609462C0077087B /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -54,6 +56,7 @@
 			children = (
 				1746FD922609462C0077087B /* ViewController.swift */,
 				17339ADC260E408800E84532 /* ShowPlaylists.swift */,
+				170D2304261BBA5100E85D32 /* WebSockets.swift */,
 			);
 			path = ViewControllers;
 			sourceTree = "<group>";
@@ -235,6 +238,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				170D2305261BBA5100E85D32 /* WebSockets.swift in Sources */,
 				17339ADD260E408800E84532 /* ShowPlaylists.swift in Sources */,
 				1746FD932609462C0077087B /* ViewController.swift in Sources */,
 				1746FD8F2609462C0077087B /* AppDelegate.swift in Sources */,

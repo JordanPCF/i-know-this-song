@@ -4,9 +4,9 @@ from song import Song
 import requests
 # import requests_cache
 from typing import Sequence
-import sys
+# import sys
 import json
-import functools
+# import functools
 
 
 SCOPE = "user-library-read%20playlist-read-private%20playlist-read-collaborative%20user-modify-playback-state%20user-read-playback-state"
@@ -80,7 +80,7 @@ def _get_mobile_device_info() -> str:
             return device['id']
 
 
-@functools.lru_cache(maxsize=100)
+# @functools.lru_cache(maxsize=100)
 def get_user_playlists() -> Sequence[Playlist]:
     response = _request_user_playlists()
 
@@ -94,7 +94,7 @@ def get_user_playlists() -> Sequence[Playlist]:
     return all_playlists
 
 
-@functools.lru_cache(maxsize=1000)
+# @functools.lru_cache(maxsize=1000)
 def get_playlists_songs(playlist: Playlist) -> Sequence[Song]:
     response = _request_playlist_songs(playlist)
     all_songs = []

@@ -49,6 +49,6 @@ def _get_lyric_snippet(hit: dict) -> str:
         return highlight['value']
 
 
-@functools.lru_cache(maxsize=1000)
+# @functools.lru_cache(maxsize=1000)
 def get_songs_from_lyrics(lyrics:str, page=1) -> Sequence[Song]:
     return _json_to_songs(_request_lyric_search(lyrics, page))

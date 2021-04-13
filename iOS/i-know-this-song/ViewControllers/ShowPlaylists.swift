@@ -16,8 +16,10 @@ class ShowPlaylists: UIViewController {
         
         let socketConnection = WebSocketTaskConnection(url: URL(string: "wss://l7pgtq5sw5.execute-api.us-west-2.amazonaws.com/production")!)
         socketConnection.connect()
-//        socketConnection.send(text: "Hello")
-        socketConnection.getPlaylists { responseString in
+//        socketConnection.getPlaylists {
+//            print("socket response:", socketConnection.response)
+//        }
+        socketConnection.sendLyricQuery(playlists: "Chill", query: "taste like Malibu") {
             print("socket response:", socketConnection.response)
         }
     }

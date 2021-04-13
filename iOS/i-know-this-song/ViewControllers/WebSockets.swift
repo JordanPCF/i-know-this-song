@@ -8,7 +8,6 @@
 import Foundation
 
 
-
 class WebSocketTaskConnection: NSObject {
     var webSocketTask: URLSessionWebSocketTask?
     var urlSession: URLSession!
@@ -31,23 +30,6 @@ class WebSocketTaskConnection: NSObject {
         webSocketTask!.cancel(with: .goingAway, reason: nil)
     }
     
-    func send(text: String) {
-        let dic = ["action": "sendMessage", "message": text]
-        do {
-            let jsonData = try JSONSerialization.data(withJSONObject: dic)
-            let jsonString = String(data: jsonData, encoding: String.Encoding.ascii)!
-            let message = URLSessionWebSocketTask.Message.string(jsonString)
-            
-            webSocketTask?.send(message) { error in
-                if let error = error {
-                    print(error)
-                }
-            }
-        } catch {
-            print(error)
-        }
-    }
-    
     func listen(completion: @escaping (String) -> ()) {
         webSocketTask!.receive { result in
             switch result {
@@ -58,7 +40,7 @@ class WebSocketTaskConnection: NSObject {
                 case .string(let text):
                     completion(text)
                 case .data(let data):
-                    print("data is ", data)
+                    completion("Received data object not String")
                 @unknown default:
                     fatalError()
                 }
@@ -66,7 +48,7 @@ class WebSocketTaskConnection: NSObject {
         }
     }
     
-    func getPlaylists(completion: @escaping (String) -> ()) {
+    func getPlaylists(completion: @escaping () -> ()) {
         let dic = ["action": "makeRequest", "requestType": "playlists"]
         do {
             let jsonData = try JSONSerialization.data(withJSONObject: dic)
@@ -84,7 +66,29 @@ class WebSocketTaskConnection: NSObject {
 
         listen(){response_text in
             self.response = response_text
-            completion(response_text)
+            completion()
+        }
+    }
+    
+    func sendLyricQuery(playlists: String, query: String, completion: @escaping () -> ()) {
+        let dic = ["action": "makeRequest", "requestType": "lyrics", "lyrics": "\(query)", "playlists": "\(playlists)"]
+        do {
+            let jsonData = try JSONSerialization.data(withJSONObject: dic)
+            let jsonString = String(data: jsonData, encoding: String.Encoding.ascii)!
+            let message = URLSessionWebSocketTask.Message.string(jsonString)
+            
+            webSocketTask?.send(message) { error in
+                if let error = error {
+                    print(error)
+                }
+            }
+        } catch {
+            print(error)
+        }
+
+        listen(){response_text in
+            self.response = response_text
+            completion()
         }
     }
 }
